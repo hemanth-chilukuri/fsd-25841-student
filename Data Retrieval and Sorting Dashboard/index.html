@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Student Dashboard</h2>
+
+<select id="sortOption" onchange="loadStudents()">
+    <option value="">Sort By</option>
+    <option value="name">Name</option>
+    <option value="dob">DOB</option>
+</select>
+
+<select id="filterDept" onchange="loadStudents()">
+    <option value="">All Departments</option>
+    <option value="CSE">CSE</option>
+    <option value="ECE">ECE</option>
+</select>
+
+<h3 id="count"></h3>
+
+<table id="studentTable" border="1"></table>
+
+<script src="script.js"></script>
+</body>
+</html>
