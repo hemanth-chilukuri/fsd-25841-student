@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Interactive Feedback Form</title>
+  <style>
+    body {
+      font-family: 'Times New Roman', Times, serif;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 20px;
+      width: 350px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px gray;
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+      border: 1px solid gray;
+    }
+
+    input:hover, textarea:hover {
+      background-color: #e6f7ff; /* mouse hover highlight */
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: green;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .error {
+      color: red;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Feedback Form</h2>
+
+  <form id="feedbackForm">
+    <input type="text" id="name" placeholder="Name">
+    <p class="error" id="nameError"></p>
+
+    <input type="email" id="email" placeholder="Email">
+    <p class="error" id="emailError"></p>
+
+    <textarea id="message" placeholder="Your Feedback"></textarea>
+    <p class="error" id="messageError"></p>
+
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+<script>
+
+// ===== Reusable Validation Functions =====
+function validateName(name) {
+  return name.length >= 3;
+}
+
+function validateEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function validateMessage(message) {
+  return message.length >= 5;
+}
+
+// ===== Keypress Validation =====
+document.getElementById("name").addEventListener("keyup", function() {
+  const name = this.value;
+  document.getElementById("nameError").innerText =
+    validateName(name) ? "" : "Name must be at least 3 characters";
+});
+
+document.getElementById("email").addEventListener("keyup", function() {
+  const email = this.value;
+  document.getElementById("emailError").innerText =
+    validateEmail(email) ? "" : "Invalid email format";
+});
+
+document.getElementById("message").addEventListener("keyup", function() {
+  const message = this.value;
+  document.getElementById("messageError").innerText =
+    validateMessage(message) ? "" : "Message must be at least 5 characters";
+});
+
+// ===== Double-click Confirmation =====
+document.getElementById("feedbackForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const message = document.getElementById("message").value;
+
+  if (!validateName(name) || !validateEmail(email) || !validateMessage(message)) {
+    alert("Please fix validation errors!");
+    return;
+  }
+
+  const confirmSubmit = confirm("Double click OK to confirm submission");
+  if (!confirmSubmit) return;
+
+  const response = await fetch("/submit-feedback", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, email, message })
+  });
+
+  const result = await response.text();
+  alert(result);
+
+  document.getElementById("feedbackForm").reset();
+});
+
+</script>
+
+</body>
+</html>
