@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Feedback Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Customer Feedback Form</h2>
+
+    <form id="feedbackForm">
+        
+        <label>Name:</label>
+        <input type="text" id="name" required>
+
+        <label>Email:</label>
+        <input type="email" id="email" required>
+
+        <label>Rating (1-5):</label>
+        <input type="number" id="rating" min="1" max="5" required>
+
+        <label>Comments:</label>
+        <textarea id="comments"></textarea>
+
+        <button type="button" ondblclick="submitForm()">Double Click to Submit</button>
+    </form>
+
+    <p id="message"></p>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
