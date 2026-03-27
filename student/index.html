@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Student Registration Form</h2>
+
+<form id="studentForm">
+    <input type="text" id="name" placeholder="Name" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="date" id="dob" required>
+    <input type="text" id="department" placeholder="Department" required>
+    <input type="text" id="phone" placeholder="Phone" required>
+    <button type="submit">Register</button>
+</form>
+
+<hr>
+
+<button onclick="loadStudents()">View Students</button>
+<table id="studentTable" border="1"></table>
+
+<script src="script.js"></script>
+</body>
+</html>
