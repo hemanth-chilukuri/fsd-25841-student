@@ -1,0 +1,12 @@
+input{
+    padding:8px;
+    margin:10px;
+    width:200px;
+}
+
+button{
+    padding:10px;
+    background:green;
+    color:white;
+    border:none;
+}
